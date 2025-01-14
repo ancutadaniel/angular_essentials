@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { HeaderComponent } from './header/header.component';
 import { UserComponent } from './user/user.component';
 
-import { DUMMY_USERS } from './dummy-users';
 import { TasksComponent } from './tasks/tasks.component';
+import { AppService } from './app.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +13,9 @@ import { TasksComponent } from './tasks/tasks.component';
   imports: [HeaderComponent, UserComponent, TasksComponent],
 })
 export class AppComponent {
-  users = DUMMY_USERS;
+  private appService = inject(AppService);
+
+  users = this.appService.getUsers();
   selectedUserId?: string;
 
   get selectedUser() {
