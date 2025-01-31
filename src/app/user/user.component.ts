@@ -19,33 +19,15 @@ import { CardComponent } from '../shared/card/card.component';
   imports: [CardComponent],
 })
 export class UserComponent {
-  // A signal is an object that holds a value and can be observed for changes
-
-  // old way of using Input
-  // @Input({ required: true }) id!: string;
-  // @Input({ required: true }) avatar!: string;
-  // @Input({ required: true }) name!: string;
-
-  @Input({ required: true }) user!: User;
-  @Input({ required: true }) isSelected!: boolean;
-  @Output() selectUser = new EventEmitter<string>();
-
-  // Old way of using computed
-  get imagePath() {
-    return `assets/users/${this.user.avatar}`;
-  }
-
-  // new way of using signal input
-  // id = input.required<string>();
-  // avatar = input.required<string>();
-  // name = input.required<string>();
-  // selectUser = output<string>();
+  user = input.required<User>();
+  isSelected = input.required<boolean>();
+  selectUser = output<string>();
 
   // New way of using computed signal
-  // imagePath = computed(() => `assets/users/${this.avatar()}`);
+  imagePath = computed(() => `assets/users/${this.user().avatar}`);
 
   // Method to select a random user
   onSelectUser() {
-    this.selectUser.emit(this.user.id);
+    this.selectUser.emit(this.user().id);
   }
 }
