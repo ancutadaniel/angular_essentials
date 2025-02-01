@@ -1,16 +1,7 @@
-import {
-  Component,
-  computed,
-  EventEmitter,
-  Input,
-  input,
-  output,
-  Output,
-} from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
 import { type User } from './user.model';
 import { CardComponent } from '../shared/card/card.component';
 
-// @Component is a decorator that tells Angular that this class is a component
 @Component({
   selector: 'app-user',
   standalone: true,

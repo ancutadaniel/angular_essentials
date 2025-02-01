@@ -35,4 +35,20 @@ export class TaskService {
   private saveTasks() {
     localStorage.setItem('tasks', JSON.stringify(this.task));
   }
+
+  sortTasks(direction: 'asc' | 'desc', userId: string) {
+    const userTasks = this.getUserTasks(userId);
+    if (!userTasks) return;
+
+    const sortedTasks = [...userTasks].sort((a, b) => {
+      if (direction === 'asc') {
+        return a.dueDate.localeCompare(b.dueDate);
+      } else {
+        return b.dueDate.localeCompare(a.dueDate);
+      }
+    });
+
+    this.task = sortedTasks;
+    this.saveTasks();
+  }
 }

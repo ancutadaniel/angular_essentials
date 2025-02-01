@@ -17,6 +17,7 @@ header {
 img {
   width: 3.5rem;
   object-fit: contain;
+  border-radius: 15px;
 }
 
 h1 {

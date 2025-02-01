@@ -7,12 +7,7 @@ export class AppService {
     {
       id: 'u1',
       name: 'Dany',
-      avatar: 'user-3.jpg',
-    },
-    {
-      id: 'u2',
-      name: 'Ami',
-      avatar: 'user-2.jpg',
+      avatar: 'user.jpg',
     },
   ];
 

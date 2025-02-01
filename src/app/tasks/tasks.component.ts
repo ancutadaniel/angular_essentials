@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject, input, signal } from '@angular/core';
 import { TaskComponent } from './task/task.component';
 import { NewTaskComponent } from './new-task/new-task.component';
 import { type NewTask } from './task/task.model';
@@ -12,27 +12,33 @@ import { TaskService } from './task.service';
   imports: [TaskComponent, NewTaskComponent],
 })
 export class TasksComponent {
-  constructor(private taskService: TaskService) {}
+  private taskService = inject(TaskService);
+  userId = input.required<string>();
+  name = input.required<string>();
 
-  @Input({ required: true }) userId!: string;
-  @Input({ required: true }) name!: string;
-
-  isAddingTask = false;
+  isAddingTask = signal(false);
+  sortDirection = signal<'asc' | 'desc' | null>(null);
 
   get selectedUserTasks() {
-    return this.taskService.getUserTasks(this.userId);
+    return this.taskService.getUserTasks(this.userId());
   }
 
   onAddTask() {
-    this.isAddingTask = true;
+    this.isAddingTask.set(true);
   }
 
   onCancelAddTask() {
-    this.isAddingTask = false;
+    this.isAddingTask.set(false);
   }
 
   onCreateTask(newTask: NewTask) {
-    this.taskService.addUserTask(newTask, this.userId);
-    this.isAddingTask = false;
+    this.taskService.addUserTask(newTask, this.userId());
+    this.isAddingTask.set(false);
+  }
+
+  toggleSort() {
+    const newDirection = this.sortDirection() === 'asc' ? 'desc' : 'asc';
+    this.sortDirection.set(newDirection);
+    this.taskService.sortTasks(newDirection, this.userId());
   }
 }
