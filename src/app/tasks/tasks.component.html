@@ -5,16 +5,6 @@
 <div class="tasks-container">
   <div class="sort-controls">
     <button (click)="toggleSort()" [class.active]="sortDirection() !== null">
-      <div class="sort-arrows">
-        <i
-          class="fas fa-sort-up"
-          [class.active]="sortDirection() === 'asc'"
-        ></i>
-        <i
-          class="fas fa-sort-down"
-          [class.active]="sortDirection() === 'desc'"
-        ></i>
-      </div>
       Sort {{ sortDirection() === "asc" ? "Descending" : "Ascending" }}
     </button>
   </div>
