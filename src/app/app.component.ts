@@ -4,13 +4,21 @@ import { UserComponent } from './user/user.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { AppService } from './services/app.service';
 import { SwUpdate } from '@angular/service-worker';
+import { RouterOutlet } from '@angular/router';
+import { VersionComponent } from './version/version.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  imports: [HeaderComponent, UserComponent, TasksComponent],
+  imports: [
+    HeaderComponent,
+    UserComponent,
+    TasksComponent,
+    RouterOutlet,
+    VersionComponent,
+  ],
 })
 export class AppComponent {
   private appService = inject(AppService);
